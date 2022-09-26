@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  minio:
+    image: minio/minio
+    ports:
+      - 9000:9000
+      - 9090:9090
+    volumes:
+      - minio-data:/data
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+    command: server /data --console-address ":9090"
+    networks:
+      - mmvib-net
+
+volumes:
+  minio-data:
+
+networks:
+  mmvib-net:
+    driver: bridge
+    name: mmvib-net
+
