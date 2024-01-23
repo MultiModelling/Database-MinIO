@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.8'
 
 services:
   minio:
@@ -9,8 +9,8 @@ services:
     volumes:
       - minio-data:/data
     environment:
-      - MINIO_ROOT_USER=admin
-      - MINIO_ROOT_PASSWORD=password
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-password}
     command: server /data --console-address ":9090"
     networks:
       - mmvib-net
@@ -21,5 +21,6 @@ volumes:
 networks:
   mmvib-net:
     driver: bridge
+    external: true
     name: mmvib-net
-
+    
